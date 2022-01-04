@@ -1,0 +1,411 @@
+{
+  "Name": "Publications",
+  "CreationDate": "2019-5-31",
+  "Commands": [
+    {
+      "Command": "comment",
+      "Target": "To export publications into SIGMA. Source is publication.csv. The website has to be on the Publications tab for this to work",
+      "Value": ""
+    },
+    {
+      "Command": "csvRead",
+      "Target": "qa_publications.csv",
+      "Value": ""
+    },
+    {
+      "Command": "echo",
+      "Target": "Inside subroutine: Status = ${!csvReadStatus}, Line = ${!csvReadLineNumber}",
+      "Value": "green"
+    },
+    {
+      "Command": "comment",
+      "Target": "Click manually add publication button",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/span[1]/span[1]",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Enter doi",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]",
+      "Value": "${!COL1}"
+    },
+    {
+      "Command": "comment",
+      "Target": "Check if error message appeared. Error means not all info could be fetched using the DOI. Set timeout higher before. Fetching can take a while",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "4",
+      "Value": "!TIMEOUT_WAIT"
+    },
+    {
+      "Command": "verifyElementPresent",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[4]/div[1]/div[1]/h1[1]",
+      "Value": ""
+    },
+    {
+      "Command": "if",
+      "Target": "${!LastCommandOK}==true",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Error message was displayed",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Click error away",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[4]",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Enter publisher",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[23]/div[1]/div[1]/div[2]/div[1]/input[1]",
+      "Value": "${!COL11}"
+    },
+    {
+      "Command": "endif",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "2",
+      "Value": "!TIMEOUT_WAIT"
+    },
+    {
+      "Command": "comment",
+      "Target": "Enter publication URL",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[9]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]",
+      "Value": "${!COL6}"
+    },
+    {
+      "Command": "comment",
+      "Target": "Enter open access URL",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[7]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]",
+      "Value": "${!COL14}"
+    },
+    {
+      "Command": "comment",
+      "Target": "Enter Country. If it couldn't be entered automatically. Info not availible so we put Unkown",
+      "Value": ""
+    },
+    {
+      "Command": "verifyElementPresent",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[25]/div[1]/div[1]/div[2]/div[1]/div[1]/span[1]",
+      "Value": ""
+    },
+    {
+      "Command": "if",
+      "Target": "${!LastCommandOK}==true",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[25]/div[1]/div[1]/div[2]/div[1]/input[1]",
+      "Value": "Unknown"
+    },
+    {
+      "Command": "store",
+      "Target": "${!COL1},${!COL2}",
+      "Value": "!csvLine"
+    },
+    {
+      "Command": "csvSave",
+      "Target": "publications_country_missing.csv",
+      "Value": ""
+    },
+    {
+      "Command": "endif",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Enter Year of publication if it couldn't be entered automatically",
+      "Value": ""
+    },
+    {
+      "Command": "verifyElementPresent",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[27]/div[1]/div[1]/div[2]/div[1]/div[1]/span[1]",
+      "Value": ""
+    },
+    {
+      "Command": "if",
+      "Target": "${!LastCommandOK}==true",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[27]/div[1]/div[1]/div[2]/div[1]/input[1]",
+      "Value": "${!COL5}"
+    },
+    {
+      "Command": "endif",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "storeEval",
+      "Target": "(\"${!COL9}\" == \"no\")",
+      "Value": "closed_access"
+    },
+    {
+      "Command": "if",
+      "Target": "${closed_access}",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[29]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/span[3]/input[1]",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Click away info dialog",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[5]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/span[1]/span[1]",
+      "Value": ""
+    },
+    {
+      "Command": "endif",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "storeEval",
+      "Target": "(\"${!COL9}\" == \"green\")",
+      "Value": "green_access"
+    },
+    {
+      "Command": "pause",
+      "Target": "500",
+      "Value": ""
+    },
+    {
+      "Command": "if",
+      "Target": "${green_access}",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[29]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/input[1]",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Enter embargo duration. Info not available => enter 0",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[31]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]",
+      "Value": "0"
+    },
+    {
+      "Command": "endif",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "storeEval",
+      "Target": "(\"${!COL9}\" == \"gold\")",
+      "Value": "gold_access"
+    },
+    {
+      "Command": "if",
+      "Target": "${gold_access}",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[29]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/span[2]/input[1]",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Enter charges info. Info not available => enter 0",
+      "Value": ""
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[31]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/input[1]",
+      "Value": "0"
+    },
+    {
+      "Command": "endif",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "storeEval",
+      "Target": "(\"${!COL8}\" == \"True\")",
+      "Value": "peer_reviewed"
+    },
+    {
+      "Command": "if",
+      "Target": "${peer_reviewed}",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[33]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/input[1]",
+      "Value": ""
+    },
+    {
+      "Command": "else",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[33]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/span[2]/input[1]",
+      "Value": ""
+    },
+    {
+      "Command": "endif",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Fill joint public/private publication? with No",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[35]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/span[2]/input[1]",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Press Add Publication",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/span[1]",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Check if error appeared when trying to save the publication",
+      "Value": ""
+    },
+    {
+      "Command": "verifyElementPresent",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[5]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]",
+      "Value": ""
+    },
+    {
+      "Command": "if",
+      "Target": "${!LastCommandOK}==true",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Error message showed => save screenshot of report",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Click View Validation Report",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[5]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/span[1]",
+      "Value": ""
+    },
+    {
+      "Command": "captureScreenshot",
+      "Target": "pub_${!COL1}_error",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Store first error in csv file",
+      "Value": ""
+    },
+    {
+      "Command": "storeText",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[5]/div[1]/div[1]/div[3]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/span[1]",
+      "Value": "error"
+    },
+    {
+      "Command": "store",
+      "Target": "${!COL1},${!COL2},${error}",
+      "Value": "!csvLine"
+    },
+    {
+      "Command": "csvSave",
+      "Target": "publications_errors.csv",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Close validation report",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[5]/div[1]/div[1]/div[2]/div[2]",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Close Form",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/span[1]/span[1]",
+      "Value": ""
+    },
+    {
+      "Command": "endif",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Wait to make sure save is done",
+      "Value": ""
+    },
+    {
+      "Command": "pause",
+      "Target": "1000",
+      "Value": ""
+    }
+  ]
+}

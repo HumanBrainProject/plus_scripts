@@ -1,0 +1,14 @@
+{
+  "name": {
+    "message": "Kantu Browser Automation",
+    "description": "extension name"
+  },
+  "description": {
+    "message": "Universal AI-powered task and test automation. Kantu combines Visual Web Automation, Visual Desktop Automation and Selenium IDE++.",
+    "description": "extension description"
+  },
+  "short_name": {
+    "message": "Kantu Macros",
+    "description": "extension short_name"
+  }
+}

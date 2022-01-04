@@ -1,0 +1,21 @@
+{
+  "Name": "Publications_delete",
+  "CreationDate": "2019-5-31",
+  "Commands": [
+    {
+      "Command": "comment",
+      "Target": "delete publications",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[11]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/img[1]",
+      "Value": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=/html[1]/body[1]/div[2]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/span[1]/span[1]",
+      "Value": ""
+    }
+  ]
+}
